@@ -100,6 +100,20 @@ const getStatePopulation = (req, res) => {
   });
 };
 
+// GET/states/:stateCode/admission date
+const getStateAdmission = (req, res) => {
+  const code = req.params.stateCode.toUpperCase();
+
+  const stateJson = statesData.find(state => state.code === code);
+  if (!stateJson) {
+    return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
+  }
+
+  return res.json({
+    state: stateJson.state,          
+    admitted: stateJson.admission_date 
+  });
+};
 
 // GET/states/:stateCode/funfact
 const getFunfacts = async (req, res) => {
@@ -148,6 +162,43 @@ const addFunfacts = async (req, res) => {
   }
 };
 
+// PATCH funfact by index
+const patchFunfact = async (req, res) => {
+  const code = req.params.stateCode.toUpperCase();
+  const { index, funfact } = req.body;
+
+  // Validate inputs
+  if (!Number.isInteger(index) || index < 1) {
+    return res.status(400).json({ message: 'Index must be a positive integer' });
+  }
+
+  if (!funfact || typeof funfact !== 'string') {
+    return res.status(400).json({ message: 'Fun fact must be a non-empty string' });
+  }
+
+  try {
+    const state = await State.findOne({ stateCode: code });
+
+    if (!state || !Array.isArray(state.funfacts) || state.funfacts.length === 0) {
+      return res.status(404).json({ message: `No Fun Facts found for ${code}` });
+    }
+
+    const arrayIndex = index - 1;
+
+    if (arrayIndex >= state.funfacts.length) {
+      return res.status(404).json({ message: `No Fun Fact found at index ${index} for ${code}` });
+    }
+
+    // Update the specific fun fact
+    state.funfacts[arrayIndex] = funfact;
+    await state.save();
+
+    res.json(state);
+  } catch (err) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 // DELETE funfact by index
 const deleteFunfact = async (req, res) => {
   const code = req.params.stateCode.toUpperCase();
@@ -155,7 +206,7 @@ const deleteFunfact = async (req, res) => {
 
   // Check that index is a positive integer
   if (!Number.isInteger(index) || index < 1) {
-    return res.status(400).json({ message: 'Index must be a positive integer (1-based)' });
+    return res.status(400).json({ message: 'Index must be a positive integer' });
   }
 
   try {
@@ -187,5 +238,7 @@ module.exports = {
   deleteFunfact,
   getStateCapital,
   getStateNickname,
-  getStatePopulation
+  getStatePopulation,
+  getStateAdmission,
+  patchFunfact
 };

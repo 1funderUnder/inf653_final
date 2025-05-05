@@ -16,12 +16,16 @@ router.get('/:stateCode/nickname', statesController.getStateNickname);
 router.get('/:stateCode/population', statesController.getStatePopulation);
 
 // Get admission
+router.get('/:stateCode/admission', statesController.getStateAdmission);
 
 // GET funfacts
 router.get('/:stateCode/funfact', statesController.getFunfacts);
 
 // POST funfacts
 router.post('/:stateCode/funfact', statesController.addFunfacts);
+
+// PATCH funfacts
+router.patch('/:stateCode/funfact', statesController.patchFunfact);
 
 // DELETE funfact
 router.delete('/:stateCode/funfact', statesController.deleteFunfact);
