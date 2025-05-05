@@ -8,7 +8,9 @@ const validateState = async (req, res, next, code) => {
     // Validate from JSON,
     const stateJson = statesData.find(state => state.code === upperCs);
     if (!stateJson) {
-      return res.status(404).json({ message: `Invalid state abbreviation parameter` });
+      const err = new Error('Invalid state abbreviation parameter');
+      err.status = 404;
+      return next(err);
     }
 
     // Attach funfacts from DB
@@ -16,9 +18,11 @@ const validateState = async (req, res, next, code) => {
     req.state = stateDoc || null;
     req.stateCode = upperCs;
 
+    // console.log('Validated stateCode:', upperCs); // To debug
+
     next();
   } catch (err) {
-    res.status(500).json({ error: 'Server error' });
+    next(err); // Pass the error to the centralized error handler
   }
 };
 

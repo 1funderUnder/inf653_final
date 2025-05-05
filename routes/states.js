@@ -6,11 +6,16 @@ const validateState = require('../middleware/validateState');
 // Middleware for stateCode param
 router.param('stateCode', validateState);
 
-// GET all states
-router.get('/', statesController.getAllStates);
+// GET capital
+router.get('/:stateCode/capital', statesController.getStateCapital);
 
-// GET one state
-router.get('/:stateCode', statesController.getState);
+// GET nickname
+router.get('/:stateCode/nickname', statesController.getStateNickname);
+
+// GET population
+router.get('/:stateCode/population', statesController.getStatePopulation);
+
+// Get admission
 
 // GET funfacts
 router.get('/:stateCode/funfact', statesController.getFunfacts);
@@ -20,6 +25,12 @@ router.post('/:stateCode/funfact', statesController.addFunfacts);
 
 // DELETE funfact
 router.delete('/:stateCode/funfact', statesController.deleteFunfact);
+
+// GET one state
+router.get('/:stateCode', statesController.getState);
+
+// GET all states
+router.get('/', statesController.getAllStates);
 
 module.exports = router;
 

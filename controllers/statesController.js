@@ -55,6 +55,52 @@ const getState = async (req, res) => {
   }
 };
 
+// GET/states/:stateCode/capital
+const getStateCapital = (req, res) => {
+  const code = req.params.stateCode.toUpperCase();
+
+  const stateJson = statesData.find(state => state.code === code);
+  if (!stateJson) {
+    return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
+  }
+
+  return res.json({
+    state: stateJson.state,          
+    capital: stateJson.capital_city 
+  });
+};
+
+// GET/states/:stateCode/nickname
+const getStateNickname = (req, res) => {
+  const code = req.params.stateCode.toUpperCase();
+
+  const stateJson = statesData.find(state => state.code === code);
+  if (!stateJson) {
+    return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
+  }
+
+  return res.json({
+    state: stateJson.state,          
+    nickname: stateJson.nickname 
+  });
+};
+
+// GET/states/:stateCode/population
+const getStatePopulation = (req, res) => {
+  const code = req.params.stateCode.toUpperCase();
+
+  const stateJson = statesData.find(state => state.code === code);
+  if (!stateJson) {
+    return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
+  }
+
+  return res.json({
+    state: stateJson.state,          
+    nickname: stateJson.population 
+  });
+};
+
+
 // GET/states/:stateCode/funfact
 const getFunfacts = async (req, res) => {
   const code = req.params.stateCode.toUpperCase();
@@ -138,5 +184,8 @@ module.exports = {
   getState,
   getFunfacts,
   addFunfacts,
-  deleteFunfact
+  deleteFunfact,
+  getStateCapital,
+  getStateNickname,
+  getStatePopulation
 };
