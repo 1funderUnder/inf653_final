@@ -142,8 +142,14 @@ const addFunfacts = async (req, res) => {
   const code = req.params.stateCode.toUpperCase();
   const { funfacts } = req.body;
 
+// Check if funfacts exists in body of request
+  if (!funfacts) {
+    return res.status(400).json({ message: 'State fun facts value required' });
+  }
+
+// Check if funfacts are an array
   if (!Array.isArray(funfacts)) {
-    return res.status(400).json({ message: 'funfacts must be an array' });
+    return res.status(400).json({ message: 'State fun facts value must be an array' });
   }
 
   try {
