@@ -3,3 +3,12 @@
 20250505	13:30:55	c7b7d298-a7c5-4e9f-b68d-93b8b74af14d	TypeError: Cannot destructure property 'funfacts' of 'req.body' as it is undefined.
 20250505	13:42:17	feed353c-401d-40a0-b40f-eacfaaf013ec	TypeError: Cannot destructure property 'funfacts' of 'req.body' as it is undefined.
 20250505	15:33:33	ab49a666-6a3f-494a-94de-5b492de8bcc3	TypeError: Cannot read properties of undefined (reading 'toUpperCase')
+20250506	14:31:18	996e229b-f39b-4b61-894a-908429de863f	SyntaxError: Unexpected token '"', ""funfact":
+" is not valid JSON
+20250506	14:31:25	f551b0a7-8474-4ecf-a25a-f240679d8498	SyntaxError: Unexpected end of JSON input
+20250506	14:31:30	6013e433-d590-4a90-9aea-ab4e279bab61	SyntaxError: Unexpected end of JSON input
+20250506	14:31:38	74ec5dd5-77d5-40cd-a5f2-a4ac901e7d76	SyntaxError: Unexpected end of JSON input
+20250506	14:31:50	cef068f7-5e5a-4252-9e75-f7c13ff6d2a5	SyntaxError: Unexpected end of JSON input
+20250506	14:31:52	9b547c97-d877-4f66-b3cf-7740dcc076fb	SyntaxError: Unexpected end of JSON input
+20250506	14:32:28	419c2752-dfc0-4c01-9dbb-b75581cc9b7d	SyntaxError: Unexpected end of JSON input
+20250506	14:32:35	388ef699-ac79-46e4-9236-60c6b3d71d1d	SyntaxError: Unexpected end of JSON input

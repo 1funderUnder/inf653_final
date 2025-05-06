@@ -96,7 +96,7 @@ const getStatePopulation = (req, res) => {
 
   return res.json({
     state: stateJson.state,          
-    nickname: stateJson.population 
+    population: stateJson.population 
   });
 };
 
