@@ -173,13 +173,18 @@ const patchFunfact = async (req, res) => {
   const code = req.params.stateCode.toUpperCase();
   const { index, funfact } = req.body;
 
+  // Check for index
+  if (index === undefined) {
+    return res.status(400).json({ message: 'State fun fact index value required' });
+  }
+
   // Validate inputs
   if (!Number.isInteger(index) || index < 1) {
     return res.status(400).json({ message: 'Index must be a positive integer' });
   }
 
   if (!funfact || typeof funfact !== 'string') {
-    return res.status(400).json({ message: 'Fun fact must be a non-empty string' });
+    return res.status(400).json({ message: 'State fun fact value required' });
   }
 
   try {
@@ -192,7 +197,7 @@ const patchFunfact = async (req, res) => {
     const arrayIndex = index - 1;
 
     if (arrayIndex >= state.funfacts.length) {
-      return res.status(404).json({ message: `No Fun Fact found at index ${index} for ${code}` });
+      return res.status(404).json({ message: `No Fun Fact found for ${code}` });
     }
 
     // Update the specific fun fact
