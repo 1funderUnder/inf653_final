@@ -197,7 +197,7 @@ const patchFunfact = async (req, res) => {
     const arrayIndex = index - 1;
 
     if (arrayIndex >= state.funfacts.length) {
-      return res.status(404).json({ message: `No Fun Fact found for ${code}` });
+      return res.status(404).json({ message: `No Fun Facts found for ${code}` });
     }
 
     // Update the specific fun fact
@@ -215,6 +215,11 @@ const deleteFunfact = async (req, res) => {
   const code = req.params.stateCode.toUpperCase();
   const { index } = req.body;
 
+  // Check for index
+  if (index === undefined) {
+  return res.status(400).json({ message: 'State fun fact index value required' });
+    }
+
   // Check that index is a positive integer
   if (!Number.isInteger(index) || index < 1) {
     return res.status(400).json({ message: 'Index must be a positive integer' });
@@ -224,13 +229,13 @@ const deleteFunfact = async (req, res) => {
     const state = await State.findOne({ stateCode: code });
 
     if (!state || !state.funfacts || state.funfacts.length === 0) {
-      return res.status(404).json({ message: `No fun facts found for ${code}` });
+      return res.status(404).json({ message: `No Fun Fact found at index ${index} for ${code}` });
     }
 
     const arrayIndex = index - 1;
 
     if (arrayIndex >= state.funfacts.length) {
-      return res.status(404).json({ message: `No Fun Fact found at index ${index} for ${code}` });
+      return res.status(404).json({ message: `No Fun Facts found for ${code}` });
     }
 
     state.funfacts.splice(arrayIndex, 1);
