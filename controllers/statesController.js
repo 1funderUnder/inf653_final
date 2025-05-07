@@ -219,7 +219,7 @@ const deleteFunfact = async (req, res) => {
     const state = await State.findOne({ stateCode: code });
 
     if (!state || !state.funfacts || state.funfacts.length === 0) {
-      return res.status(404).json({ message: `No Fun Fact found at index ${index} for ${code}` });
+      return res.status(404).json({ message: `No Fun Fact found at that index for ${code}` });
     }
 
     const arrayIndex = index - 1;
