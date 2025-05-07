@@ -21,7 +21,12 @@ app.use(express.json());
 //serve static files
 app.use('/', express.static(path.join(__dirname, '/public')));
 
-// routes
+// serve index page
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  });
+
+// routes for API
 app.use('/states', require('./routes/states'));
 
 app.use((req, res, next) => {
