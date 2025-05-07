@@ -15,6 +15,7 @@ const validateState = async (req, res, next, code) => {
 
     // Attach funfacts from DB
     const stateDoc = await State.findOne({ stateCode: upperCs }).exec();
+    req.stateJson = stateJson;
     req.state = stateDoc || null;
     req.stateCode = upperCs;
 
