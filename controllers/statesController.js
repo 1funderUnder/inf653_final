@@ -87,12 +87,7 @@ const getStateNickname = (req, res) => {
 
 // GET/states/:stateCode/population
 const getStatePopulation = (req, res) => {
-  const code = req.params.stateCode.toUpperCase();
-
-  const stateJson = statesData.find(state => state.code === code);
-  if (!stateJson) {
-    return res.status(404).json({ message: 'Invalid state abbreviation parameter' });
-  }
+  const { stateJson } = req;
 
   return res.json({
     state: stateJson.state,          

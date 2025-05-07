@@ -19,8 +19,6 @@ const validateState = async (req, res, next, code) => {
     req.state = stateDoc || null;
     req.stateCode = upperCs;
 
-    // console.log('Validated stateCode:', upperCs); // To debug
-
     next();
   } catch (err) {
     next(err); // Pass the error to the centralized error handler
