@@ -4,9 +4,9 @@ const statesData = require('../model/states.json');
 const validateState = async (req, res, next, code) => {
   try {
     const upperCs = code.toUpperCase();
-
+   
     // Validate from JSON,
-    const stateJson = statesData.find(state => state.code === upperCs);
+    const stateJson = statesData.find(state => state.code.trim().toUpperCase() === upperCs);
     if (!stateJson) {
       const err = new Error('Invalid state abbreviation parameter');
       err.status = 404;
